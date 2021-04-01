@@ -1,23 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./style/App.css";
+import {
+  MenuItem,
+  FormControl,
+  Select,
+  Card,
+  CardContent,
+} from "@material-ui/core";
+import InfoBox from "./components/InfoBox";
 
 function App() {
+  const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState("Worldwide");
+
+  useEffect(() => {
+    //Async API request
+    const getCountriesData = async () => {
+      await fetch("https://disease.sh/v3/covid-19/countries")
+        .then((response) => response.json())
+        .then((data) => {
+          const countries = data.map((country) => ({
+            name: country.country, //France, Cameroon, United States
+            value: country.countryInfo.iso2, //FR, CM, US
+          }));
+          setCountries(countries);
+        });
+    };
+    getCountriesData();
+  }, []);
+
+  //Listen to any change
+  const onCountryChange = async (event) => {
+    //select a country
+    const countryCode = event.target.value;
+    console.log("country code >>>", countryCode);
+    setCountry(countryCode);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/**Header */}
+      <div className="app__header">
+        {/**Title and select input dropdown */}
+        <h1>COVID 19 TRACKER</h1>
+        {/**Dropdown menu */}
+        <FormControl className="app__dropdown">
+          <Select variant="outlined" onChange={onCountryChange} value={country}>
+            <MenuItem value="Worldwide">Worldwide</MenuItem>
+            {countries.map((country) => (
+              <MenuItem value={country.value}>{country.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+
+      <div className="app__stats">
+        {/**InfoBox title="Coronavirus cases" */}
+        <InfoBox title="Coronavirus Cases" cases={122003} total={550005} />
+        {/**InfoBox title="Coronavirus recoveries" */}
+        <InfoBox title="Recovered" cases={16223} total={55665} />
+        {/**InfoBox title="Deaths"*/}
+        <InfoBox title="Deaths" cases={51223} total={5505} />
+      </div>
+
+      {/**Table */}
+      {/**Graph */}
+
+      {/**Map */}
     </div>
   );
 }
