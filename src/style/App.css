@@ -1,9 +1,17 @@
 * {
   margin: o;
 }
-body{
+
+body {
   background-color: #f5f6fa;
 }
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
 .app__header {
   display: flex;
   align-items: center;
@@ -11,7 +19,19 @@ body{
   margin-bottom: 20px;
 }
 
-.app__stats{
+.app__left {
+  flex: 0.9;
+}
+
+.app__stats {
   display: flex;
   justify-content: space-between;
+}
+
+/*Manage Display on devices*/
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
 }
