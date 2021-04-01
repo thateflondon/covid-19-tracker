@@ -7,7 +7,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-//import "./style/InfoBox.css";
+import "../style/InfoBox.css";
 
 function InfoBox({ title, cases, total }) {
   return (
