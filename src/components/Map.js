@@ -4,7 +4,7 @@ import "../style/Map.css";
 function Map() {
   return (
     <div className="map">
-      <h1>The map here !</h1>
+      <h1>The map goes here !</h1>
     </div>
   );
 }
