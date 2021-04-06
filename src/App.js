@@ -24,6 +24,8 @@ function App() {
   //Map
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+  //Create circle according the size of the data
+  const [mapCountries, setMapCountries] = useState([]);
 
   //All the cases
   useEffect(() => {
@@ -48,7 +50,9 @@ function App() {
 
           const sortedData = sortData(data); //sort data
           setTableData(sortedData); //fetch sorted data
+          //setMapCountries(data);
           setCountries(countries);
+          setMapCountries(data);
         });
     };
     getCountriesData();
@@ -59,7 +63,7 @@ function App() {
     //select a country
     const countryCode = event.target.value;
     //console.log("country code >>>", countryCode);
-    //setCountry(countryCode);
+    setCountry(countryCode);
 
     const url =
       countryCode === "Worldwide"
@@ -136,7 +140,10 @@ function App() {
         </div>
 
         {/**Map */}
-        <Map center={mapCenter} zoom={mapZoom} />
+        <Map 
+        center={mapCenter}
+        zoom={mapZoom} 
+        countries={mapCountries} />
       </div>
 
       <Card className="app__right">
