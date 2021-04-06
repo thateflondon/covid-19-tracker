@@ -46,6 +46,10 @@ export const sortData = (data) => {
   //console.log(cases.a);
 };
 
+//Makes the stats reading easier
+export const prettyStat = (stat) =>
+  stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+
 //Circles on the map
 export const showDataOnMap = (data, casesType = "cases") =>
   data.map((country) => (
