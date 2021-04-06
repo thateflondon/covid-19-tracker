@@ -104,7 +104,7 @@ function App() {
         {/**Header */}
         <div className="app__header">
           {/**Title and select input dropdown */}
-          <h1>COVID 19 TRACKER</h1>
+          <h1>COVID-19</h1>
           {/**Dropdown menu */}
           <FormControl className="app__dropdown">
             <Select
@@ -123,6 +123,8 @@ function App() {
         <div className="app__stats">
           {/**InfoBox title="Coronavirus cases" */}
           <InfoBox
+            isRed
+            active={casesType === "cases"}
             onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
             cases={prettyStat(countryInfo.todayCases)}
@@ -130,6 +132,7 @@ function App() {
           />
           {/**InfoBox title="Coronavirus recoveries" */}
           <InfoBox
+            active={casesType === "recovered"}
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
             cases={prettyStat(countryInfo.todayRecovered)}
@@ -137,6 +140,8 @@ function App() {
           />
           {/**InfoBox title="Deaths"*/}
           <InfoBox
+            isOrange
+            active={casesType === "deaths"}
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
             cases={prettyStat(countryInfo.todayDeaths)}
@@ -145,7 +150,12 @@ function App() {
         </div>
 
         {/**Map */}
-        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} casesType={casesType} />
+        <Map
+          center={mapCenter}
+          zoom={mapZoom}
+          countries={mapCountries}
+          casesType={casesType}
+        />
       </div>
 
       <Card className="app__right">
@@ -153,9 +163,9 @@ function App() {
           <h3>Live Cases by Country</h3>
           {/**Table */}
           <Table countries={tableData} />
-          <h3>Worldwide New Cases</h3>
-          <LineGraph />
           {/**Graph */}
+          <h3>Worldwide {casesType}</h3>
+          <LineGraph casesType={casesType} />
         </CardContent>
       </Card>
     </div>
