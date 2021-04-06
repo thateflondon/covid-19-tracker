@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./style/App.css";
 import {
   MenuItem,
   FormControl,
@@ -8,11 +8,11 @@ import {
   CardContent,
 } from "@material-ui/core";
 import InfoBox from "./components/InfoBox";
-import Map from "./components/Map";
-import Table from "./components/Table";
-import "./style/App.css";
-import { sortData } from "./util";
 import LineGraph from "./components/LineGraph";
+import Table from "./components/Table";
+import { sortData } from "./util";
+import Map from "./components/Map";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -21,6 +21,9 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   //Table
   const [tableData, setTableData] = useState([]);
+  //Map
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);
 
   //All the cases
   useEffect(() => {
@@ -118,7 +121,7 @@ function App() {
         </div>
 
         {/**Map */}
-        <Map />
+        <Map center={mapCenter} zoom={mapZoom} />
       </div>
 
       <Card className="app__right">
