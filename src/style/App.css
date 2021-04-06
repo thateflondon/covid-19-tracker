@@ -12,6 +12,15 @@ body {
   padding: 20px;
 }
 
+.app__dropdown {
+  background-color: white;
+}
+
+.app__header h1 {
+  color: #CC1034;
+  font-size: 2rem;
+}
+
 .app__header {
   display: flex;
   align-items: center;

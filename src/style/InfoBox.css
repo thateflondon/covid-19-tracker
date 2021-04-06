@@ -12,7 +12,7 @@
 }
 
 .infoBox--red {
-    border-color: red;
+    border-color: #cc1034;
 }
 
 .infoBox--orange {
@@ -20,7 +20,7 @@
 }
 
 .infoBox__cases--green {
-    color: lightgreen !important;
+    color: #7dd71d !important;
 }
 
 .infoBox__cases {
@@ -28,6 +28,10 @@
     font-weight: 600;
     font-size: 1.75rem;
     margin-bottom: 0.5rem;
+}
+
+.infoBox__cases--orange {
+    color: #fb4443;
 }
 
 .infoBox__total {
