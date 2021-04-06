@@ -26,6 +26,8 @@ function App() {
   const [mapZoom, setMapZoom] = useState(3);
   //Create circle according the size of the data
   const [mapCountries, setMapCountries] = useState([]);
+  //Select the infoBoxes (Cases, Revovered or Deaths)
+  const [casesType, setCasesType] = useState("cases");
 
   //All the cases
   useEffect(() => {
@@ -121,18 +123,21 @@ function App() {
         <div className="app__stats">
           {/**InfoBox title="Coronavirus cases" */}
           <InfoBox
+            onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
             cases={prettyStat(countryInfo.todayCases)}
             total={prettyStat(countryInfo.cases)}
           />
           {/**InfoBox title="Coronavirus recoveries" */}
           <InfoBox
+            onClick={(e) => setCasesType("recovered")}
             title="Recovered"
             cases={prettyStat(countryInfo.todayRecovered)}
             total={prettyStat(countryInfo.recovered)}
           />
           {/**InfoBox title="Deaths"*/}
           <InfoBox
+            onClick={(e) => setCasesType("deaths")}
             title="Deaths"
             cases={prettyStat(countryInfo.todayDeaths)}
             total={prettyStat(countryInfo.deaths)}
@@ -140,10 +145,7 @@ function App() {
         </div>
 
         {/**Map */}
-        <Map 
-        center={mapCenter}
-        zoom={mapZoom} 
-        countries={mapCountries} />
+        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} casesType={casesType} />
       </div>
 
       <Card className="app__right">

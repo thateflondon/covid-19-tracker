@@ -9,9 +9,9 @@ import {
 } from "@material-ui/core";
 import "../style/InfoBox.css";
 
-function InfoBox({ title, cases, total }) {
+function InfoBox({ title, cases, total, ...props }) {
   return (
-    <Card className="infoBox">
+    <Card onClick={props.onClick} className="infoBox">
       <CardContent>
         {/**Title */}
         <Typography className="infoBox__title" color="textSecondary">
