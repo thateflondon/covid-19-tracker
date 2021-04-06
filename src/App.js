@@ -58,8 +58,8 @@ function App() {
   const onCountryChange = async (event) => {
     //select a country
     const countryCode = event.target.value;
-    console.log("country code >>>", countryCode);
-    setCountry(countryCode);
+    //console.log("country code >>>", countryCode);
+    //setCountry(countryCode);
 
     const url =
       countryCode === "Worldwide"
@@ -72,6 +72,21 @@ function App() {
         setCountry(countryCode);
         //All of the data from the country response
         setCountryInfo(data);
+        //Point to a choosen location
+        if (typeof data.countryInfo !== "undefined") {
+          const {
+            countryInfo: { lat, long },
+          } = data;
+          setMapCenter({ lat, lng: long });
+
+          setMapZoom(4);
+        } else {
+          setMapCenter({ lat: 34.80746, lng: -40.4796 });
+          setMapZoom(3);
+        }
+        //Works with Map (v.2.8.0 react-leaflet not on v.3 with MapContainer)
+        //setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        //setMapZoom(4);
       });
   };
 
